@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+#
+
+AVRGCC="avr-gcc"
+AVROBJCOPY="avr-objcopy"
+
+# attiny13
+#MCU=attiny13
+#CPU=1200000UL
+
+# atmega8
+MCU=atmega8
+F_CPU=1600000UL
+
+"$AVRGCC" -Wall -Wno-inline -Os -mmcu=$MCU -DF_CPU=$F_CPU -g -std=c99 -o flicker.elf flicker.c
+"$AVROBJCOPY" -R .eeprom -O ihex --gap-fill=0xff flicker.elf flicker.hex
