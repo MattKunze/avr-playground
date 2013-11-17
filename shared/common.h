@@ -68,6 +68,24 @@ void debug_flash(
 	}
 }
 
+void debug_flash_pin( 
+			uint8_t times,
+			uint8_t pulse,
+			uint8_t width,
+      uint8_t pin)
+{
+	while(times)
+	{
+		DEBUG_LED_PORT |= _BV(pin);
+		sleep(pulse);
+		DEBUG_LED_PORT &= ~_BV(pin);
+
+		times--;
+		if(times)
+			sleep(width);
+	}
+}
+
 #endif // DEBUG_LED_PORT
 
 #endif // __AVR_COMMON_H__
