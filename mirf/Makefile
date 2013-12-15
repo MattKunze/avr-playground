@@ -11,10 +11,10 @@ clean:
 	rm -f *.o *.elf *.map *.hex
 
 mirf_tx_test.hex : mirf_tx_test.elf
-	$(OBJCOPY) -j .text -O ihex mirf_tx_test.elf mirf_tx_test.hex
+	$(OBJCOPY) -R .eeprom -R .fuse -R .lock -R .signature -O ihex mirf_tx_test.elf mirf_tx_test.hex
 
 mirf_tx_test.elf : mirf_tx_test.o mirf.o spi.o
-	$(CC) $(CFLAGS) -o mirf_tx_test.elf -lm -Wl,-Map,mirf_tx_test.map mirf_tx_test.o # mirf.o spi.o
+	$(CC) $(CFLAGS) -o mirf_tx_test.elf -lm -Wl,-Map,mirf_tx_test.map mirf_tx_test.o mirf.o spi.o
 
 mirf_tx_test.o : mirf_tx_test.c
 	$(CC) $(CFLAGS) -I. -c mirf_tx_test.c

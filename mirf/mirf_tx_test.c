@@ -15,8 +15,8 @@
 #include <util/delay.h>
 
 #include "nRF24L01.h"
-#include "spi.c"
-#include "mirf.c"
+#include "spi.h"
+#include "mirf.h"
 
 // ATtiny25/45/85 Pin map
 //                                 +-\/-+
